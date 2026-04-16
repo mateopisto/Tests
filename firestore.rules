@@ -1,0 +1,50 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // ===============================================================
+    // Assumed Data Model
+    // ===============================================================
+    //
+    // Collection: scores
+    // Document ID: {playerId} (Berni, Mateo, Sonja, Trieu)
+    // Fields:
+    //   - playerId: string (required)
+    //   - points: number (required, >= 0)
+    //   - updatedAt: timestamp (required)
+    //
+    // Collection: logs
+    // Document ID: {logId}
+    // Fields:
+    //   - playerId: string (required)
+    //   - timestamp: timestamp (required)
+    //   - type: string (required, 'add' or 'reset')
+    //
+    // ===============================================================
+
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isValidScore(data) {
+      return data.playerId is string &&
+             data.points is number && data.points >= 0 &&
+             data.updatedAt is timestamp;
+    }
+
+    function isValidLog(data) {
+      return data.playerId is string &&
+             data.timestamp is timestamp &&
+             data.type in ['add', 'reset'];
+    }
+
+    match /scores/{playerId} {
+      // User explicitly requested no login for this shared app.
+      allow read, write: if true;
+    }
+
+    match /logs/{logId} {
+      allow read, create, delete: if true;
+    }
+  }
+}

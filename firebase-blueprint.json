@@ -1,0 +1,36 @@
+{
+  "entities": {
+    "Score": {
+      "title": "Score",
+      "description": "A score entry for a player",
+      "type": "object",
+      "properties": {
+        "playerId": { "type": "string", "description": "The ID of the player (Berni, Mateo, Sonja, Trieu)" },
+        "points": { "type": "number", "description": "The total points for the player" },
+        "updatedAt": { "type": "string", "format": "date-time", "description": "When the score was last updated" }
+      },
+      "required": ["playerId", "points", "updatedAt"]
+    },
+    "Log": {
+      "title": "Log",
+      "description": "A log of point additions for undo functionality",
+      "type": "object",
+      "properties": {
+        "playerId": { "type": "string" },
+        "timestamp": { "type": "string", "format": "date-time" },
+        "type": { "type": "string", "enum": ["add", "reset"] }
+      },
+      "required": ["playerId", "timestamp", "type"]
+    }
+  },
+  "firestore": {
+    "/scores/{playerId}": {
+      "schema": "Score",
+      "description": "The current scores for each player"
+    },
+    "/logs/{logId}": {
+      "schema": "Log",
+      "description": "History of actions for undoing"
+    }
+  }
+}

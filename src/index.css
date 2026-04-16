@@ -1,0 +1,81 @@
+@import "tailwindcss";
+
+@theme {
+  --font-playful: "Comic Sans MS", "Comic Sans", "Chalkboard SE", "Marker Felt", sans-serif;
+}
+
+body {
+  font-family: var(--font-playful);
+  background-color: #d4d4d8; /* Zinc-300 for a concrete/pavement feel */
+  background-image: radial-gradient(#a1a1aa 1px, transparent 1px);
+  background-size: 20px 20px;
+  color: #18181b;
+  overflow-x: hidden;
+}
+
+.tally-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  min-height: 1.5rem;
+}
+
+.tally-stroke {
+  width: 3px;
+  height: 24px;
+  background-color: #18181b; /* Black strokes */
+  border-radius: 1px;
+  display: inline-block;
+  transform: rotate(1deg);
+  box-shadow: 1px 1px 0px rgba(255,255,255,0.2);
+}
+
+.tally-stroke-diagonal {
+  width: 3px;
+  height: 32px;
+  background-color: #18181b; /* Black strokes */
+  border-radius: 1px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) rotate(-70deg);
+  box-shadow: 1px 1px 0px rgba(255,255,255,0.2);
+}
+
+.tally-group {
+  position: relative;
+  display: flex;
+  gap: 4px;
+  padding: 0 6px;
+}
+
+/* Game-like card style */
+.game-card {
+  background: #f4f4f5;
+  border: 4px solid #18181b;
+  box-shadow: 8px 8px 0px #18181b;
+  border-radius: 4px;
+}
+
+.game-button {
+  background: #ffffff;
+  border: 3px solid #18181b;
+  box-shadow: 4px 4px 0px #18181b;
+  border-radius: 4px;
+  transition: all 0.1s;
+}
+
+.game-button:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0px #18181b;
+}
+
+.game-button-red {
+  background: #ef4444;
+  color: white;
+}
+
+.game-button-amber {
+  background: #f59e0b;
+  color: white;
+}

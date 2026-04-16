@@ -1,0 +1,5 @@
+{
+  "name": "Weinkasse Strichliste",
+  "description": "A real-time scoreboard for tracking helmet-less bike rides among friends.",
+  "requestFramePermissions": []
+}
